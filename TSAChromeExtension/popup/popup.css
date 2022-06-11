@@ -1,0 +1,66 @@
+html {
+	width: 200px;
+	height: 175px;
+}
+
+body {
+	padding: 0.75rem;
+	margin: 0;
+	font-family: "Roboto", sans-serif;
+}
+
+h1 {
+	font-size: medium;
+	text-align: center;
+	font-family: "Roboto", sans-serif;
+	font-weight: 300;
+	text-transform: uppercase;
+}
+
+hr {
+	background-image: linear-gradient(
+	  to right,
+	  rgba(0, 0, 0, 0),
+	  rgba(0, 0, 0, 0.2),
+	  rgba(0, 0, 0, 0)
+	);
+	border: 0;
+	height: 1px;
+}
+  
+ul {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+li {
+	cursor: grab;
+	padding: .2em 1em .2em 1.5em;
+	font-family: "Roboto", sans-serif;
+	text-transform: uppercase;
+}
+
+
+
+.current:before {
+	content: '';
+	width: .55em;
+	height: .25em;
+	border-style: solid;
+	border-width: 0 0 .2em .2em;
+	position: absolute;
+	margin-left: -1.1em;
+	-webkit-transform: rotate(-50deg) skew(-8deg, -8deg);
+	margin-top: .3em;
+}
+
+li:hover {
+	color: white;
+	background: -webkit-linear-gradient(top, rgba(255,255,255,.3) 25%, rgba(255,255,255,0)),rgb(19, 85, 253);
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
