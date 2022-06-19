@@ -1,6 +1,6 @@
-let ul = document.createElement('ul'),
-    current = 'Original',
-    vision = {
+let ul = document.createElement('ul');
+let current = 'Original';
+let vision = {
       'Original': '',
       'Protanomaly': '100%',
       'Deuteranomaly': '100%',
@@ -8,14 +8,17 @@ let ul = document.createElement('ul'),
       'Achromatomaly': '100%',
     }
 
-Object.keys(vision).forEach(function (el) {
+Object.keys(vision).forEach(function (el) { //for each of the visions, add a button
   let li = document.createElement('li');
   li.dataset['type'] = el;
   li.textContent = el;
-  li.addEventListener('click', handler, false);
+  li.addEventListener('click', handler, false); //handler function for events
   el == current && li.classList.add('current');
-  ul.appendChild(li);
+  ul.appendChild(li); //add the new html to the ul
 })
+let pbt = document.getElementById('pbt'), mbt = document.getElementById('mbt');
+pbt.addEventListener('click', handler2a, false);
+mbt.addEventListener('click', handler2b, false);
 
 function handler(e) {
   current = this.dataset['type'];
@@ -24,6 +27,22 @@ function handler(e) {
   })
   this.classList.add('current');
   chrome.tabs.insertCSS(null, { code: 'html { -webkit-filter: url(#' + current + '); }' });
+  
+  //chrome.tabs.insertCSS(null, { code: 'html { -webkit-filter: url(#' + current + '); }' }); //html { -webkit-filter: url(#Protanomaly);)}
+}
+function handler2a(e) {
+  chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+    let sfilter = current + "Matrix";
+    chrome.tabs.sendMessage(tabs[0].id, { msg: "add", data: sfilter }, (response) => {
+    });
+  });
+}
+function handler2b(e) {
+  chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+    let sfilter = current + "Matrix";
+    chrome.tabs.sendMessage(tabs[0].id, { msg: "sub", data: sfilter }, (response) => {
+    });
+  });
 }
 
 function $(selector, context) {
