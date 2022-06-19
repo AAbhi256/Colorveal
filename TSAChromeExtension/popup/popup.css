@@ -40,8 +40,25 @@ li {
 	font-family: "Roboto", sans-serif;
 	text-transform: uppercase;
 }
-
-
+.adjust {
+	display: flex;
+	justify-content: space-around;
+	text-align: center;
+	font-size: 200%;
+	padding-top: 0.25em;
+	padding-bottom: 0.25em;
+}
+.pbt {
+	padding: 0.25em;
+	cursor: grab;
+	display: block;
+	justify-content: center;
+	text-align: center;
+}
+.pbt:hover {
+	color: white;
+	background: -webkit-linear-gradient(top, rgba(255,255,255,.3) 25%, rgba(255,255,255,0)),rgb(19, 85, 253);
+}
 
 .current:before {
 	content: '';
