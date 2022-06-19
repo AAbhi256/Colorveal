@@ -5,4 +5,69 @@ xhr.addEventListener('load', function(e) {
   filter.style.display = 'none';
   document.body.appendChild(filter);
 })
+
+chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+  if(request) {
+      if (request.msg == "add") {
+          let sfilter = request.data;
+          let svg = document.getElementById(sfilter);
+          let curValues = svg.values.baseVal;
+          let res = "";
+          for (let i=0; i<4; i++) {
+            for (let j=0; j<5; j++) {
+              let x = curValues[i*5+j].value;
+              if (x > 1) {
+                let nv = x*1.1;
+                res += nv.toString() + " ";
+              }
+              else if (x > 0 && x != 1) {
+                let nv = x*1.00015;
+                res += nv.toString() + " ";
+              }
+              else {
+                res += x.toString() + " ";
+              }
+            }
+            res += " ";
+          }
+          svg.setAttribute('values', res);
+          //console.log(svg.values);
+          console.log(res);
+          sendResponse({ sender: "popup.js", data: "bald"  }); 
+      }
+  }
+});
+
+chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+  if(request) {
+      if (request.msg == "sub") {
+          let sfilter = request.data;
+          let svg = document.getElementById(sfilter);
+          let curValues = svg.values.baseVal;
+          let res = "";
+          for (let i=0; i<4; i++) {
+            for (let j=0; j<5; j++) {
+              let x = curValues[i*5+j].value;
+              if (x/1.1 > 1) {
+                let nv = x/1.1;
+                res += nv.toString() + " ";
+              }
+              else if (x/1.00015 > 0 && x != 1) {
+                let nv = x/1.00015;
+                res += nv.toString() + " ";
+              }
+              else {
+                res += x.toString() + " ";
+              }
+            }
+            res += " ";
+          }
+          svg.setAttribute('values', res);
+          //console.log(svg.values);
+          //console.log(res);
+          sendResponse({ sender: "popup.js", data: "bald"  }); // This response is sent to the message's sender 
+      }
+  }
+});
+
 xhr.send();
