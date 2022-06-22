@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="0" height="0">
+	<defs>
+		<filter id="Original">
+			<feColorMatrix values="	1 0 0 0 0
+									0 1 0 0 0
+									0 0 1 0 0
+									0 0 0 1 0"/>
+		</filter>
+		
+		<filter id="Protanomaly" >
+			<!-- <feColorMatrix type="saturate" values="1.1"/> -->
+			<feColorMatrix id = "ProtanomalyMatrix" values="	1.2 0.00358 0.00358 0 0
+																0 1 0 0 0
+																0 0 1 0 0
+																0 0 0 1 0"/>
+			<!-- <feColorMatrix values="	1.2 0 0 0 -0.2
+									0 1.2 0 0 -0.2
+									0 0 1.2 0 -0.2
+									0 0 0 1 0"/> -->
+
+		</filter>
+
+		<filter id="Deuteranomaly">
+			<feColorMatrix id = "DeuteranomalyMatrix" values="	1 0 0 0 0
+									0.00358 1.2 0.00358 0 0
+									0 0 1 0 0
+									0 0 0 1 0"/>
+		</filter>
+
+		<filter id="Tritanomaly">
+			<feColorMatrix id = "TritanomalyMatrix" values="	1 0 0 0 0
+									0 1 0 0 0
+									0.00358 0.00358 1.2 0 0
+									0 0 0 1 0"/>
+                        
+		</filter>
+
+		<filter id="Achromatomaly">
+			<feColorMatrix type="saturate" values="1.4"/>
+                        
+		</filter>
+		
+		<filter id="Simulate-Protanomaly">
+			<feColorMatrix values="	0.566 0.433 0 0 0
+						0.558 0.442 0 0 0
+						0 0.242 0.758 0 0
+						0 0 0 1 0"/>
+		</filter>
+	</defs>
+</svg>
