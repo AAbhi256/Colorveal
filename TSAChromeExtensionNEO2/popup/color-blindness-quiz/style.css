@@ -5,7 +5,7 @@
   button-radius: 
 }
 body {
-background-color: #8ecae6;
+background-color: #fff;
 }
 
   .grid {
@@ -15,8 +15,8 @@ margin: 0 auto;
 background-color: #fff;
 padding: 10px 50px 50px 50px;
 border-radius: 50px;
-border: 2px solid #219ebc;
-box-shadow: 10px 15px 5px #126782;
+border: 2px solid #fff;
+box-shadow: 10px 15px 5px #fff;
 }
 
 .buttons img
