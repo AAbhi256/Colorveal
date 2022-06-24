@@ -1,9 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=PT+Serif&display=swap');
 
-
-.button {
-  button-radius: 
-}
 body {
 background-color: #fff;
 }
@@ -59,8 +55,7 @@ margin-top: 30px;
 #btn0,
 #btn1,
 #btn2,
-#btn3,
-#btn4 {
+#btn3 {
 
     padding: 0px;
 font-size: 20px;
@@ -73,8 +68,7 @@ margin: 10px 20px 10px 0px;
 #btn0:hover,
 #btn1:hover,
 #btn2:hover,
-#btn3:hover,
-#btn4:hover {
+#btn3:hover {
 cursor: pointer;
 background-color: #ffc107;
 }
@@ -82,8 +76,7 @@ background-color: #ffc107;
 #btn0:focus,
 #btn1:focus,
 #btn2:focus,
-#btn3:focus,
-#btn4:focus {
+#btn3:focus {
 outline: 0;
 }
 
