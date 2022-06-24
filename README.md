@@ -1,4 +1,4 @@
-# Colorveal
+# ColorVeal
 Old description: yes.
 
 
