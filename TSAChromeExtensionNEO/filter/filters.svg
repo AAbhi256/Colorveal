@@ -38,15 +38,18 @@
 		</filter>
 
 		<filter id="Achromatomaly">
-			<feColorMatrix type="saturate" values="1.4"/>
+			<feColorMatrix id = "AchromatomalyMatrix" values="	1.2 0 0 0 0
+																0 1.2 0 0 0
+																0 0 1.2 0 0
+																0 0 0 1 0"/>
                         
 		</filter>
 		
-		<filter id="Simulate-Protanomaly">
-			<feColorMatrix values="	0.566 0.433 0 0 0
-						0.558 0.442 0 0 0
-						0 0.242 0.758 0 0
-						0 0 0 1 0"/>
+		<filter id="Custom">
+			<feColorMatrix id = 'CustomMatrix' values="	1 0 0 0 0
+														0 1 0 0 0
+														0 0 1 0 0
+														0 0 0 1 0"/>
 		</filter>
 	</defs>
 </svg>

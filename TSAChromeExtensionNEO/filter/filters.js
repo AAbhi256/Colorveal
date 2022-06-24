@@ -7,7 +7,7 @@ xhr.addEventListener('load', function(e) {
 })
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-  console.log("some message receieved");
+  //console.log("some message receieved");
   if (request.msg == "add") {
       let sfilter = request.data;
       let svg = document.getElementById(sfilter);
@@ -32,14 +32,13 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
       }
       svg.setAttribute('values', res);
       //console.log(svg.values);
-      console.log(res);
+      //console.log(res);
       sendResponse({ sender: "popup.js", data: "bald"  }); 
   }
   return true;
 });
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-  console.log("some message receieved");
   if (request.msg == "sub") {
       let sfilter = request.data;
       let svg = document.getElementById(sfilter);
@@ -64,8 +63,29 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
       }
       svg.setAttribute('values', res);
       //console.log(svg.values);
-      console.log(res);
+      //console.log(res);
       sendResponse({ sender: "popup.js", data: "bald"  }); // This response is sent to the message's sender 
+  }
+  else if (request.msg == "custom") {
+    let values = request.data;
+    let svg = document.getElementById("CustomMatrix");
+    //console.log(values);
+
+    chrome.storage.sync.set({'key': values}, function() {
+    });
+    
+
+    svg.setAttribute('values', values);
+  }
+  else if (request.msg == "init") {
+    chrome.storage.sync.get(['key'], function(result) {
+      let temp = result.key;
+      //console.log(temp);
+      if (temp != null) {
+        let svg = document.getElementById("CustomMatrix");
+        svg.setAttribute('values', temp);
+      }
+    });
   }
   return true;
 });

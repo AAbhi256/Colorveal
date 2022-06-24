@@ -1,12 +1,13 @@
 let ul = document.createElement('ul');
 let current = 'Original';
 let vision = {
-      'Original': '',
-      'Protanomaly': '100%',
-      'Deuteranomaly': '100%',
-      'Tritanomaly': '100%',
-      'Achromatomaly': '100%',
-    }
+  'Original': '',
+  'Protanomaly': '100%',
+  'Deuteranomaly': '100%',
+  'Tritanomaly': '100%',
+  'Achromatomaly': '100%',
+  'Custom': '100%'
+}
 
 Object.keys(vision).forEach(function (el) { //for each of the visions, add a button
   let li = document.createElement('li');
@@ -20,7 +21,17 @@ let pbt = document.getElementById('pbt'), mbt = document.getElementById('mbt');
 pbt.addEventListener('click', handler2a, false);
 mbt.addEventListener('click', handler2b, false);
 
+let inited = false;
+
 function handler(e) {
+  if (!inited) {
+    inited = true;
+    chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+      chrome.tabs.sendMessage(tabs[0].id, { msg: "init", data: null }, (response) => {
+      });
+    });
+  }
+
   current = this.dataset['type'];
   $.all('li').forEach(function(li) {
     li.classList.remove('current');
