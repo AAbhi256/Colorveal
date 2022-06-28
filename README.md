@@ -1,7 +1,6 @@
 # ColorVeal
 Old description: yes.
-
-
+Update: Use the 100 hues test for the image in order to tell when the custom filter is correct
 
 New description: 
 Instructions for Operating the Chrome Extension
