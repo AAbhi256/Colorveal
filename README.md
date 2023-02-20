@@ -1,8 +1,5 @@
 # ColorVeal
-Old description: yes.
-Update: Use the 100 hues test for the image in order to tell when the custom filter is correct 
- 
-New description: 
+
 Instructions for Operating the Chrome Extension
 
 In this repository, you will find several folders. Any of the folders that are titled as extensions are versions of our chrome extension. Simply download one of them(we recommend the most recent one) and extract the zip file.
