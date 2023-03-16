@@ -22,7 +22,9 @@ let pbt = document.getElementById('pbt'), mbt = document.getElementById('mbt');
 pbt.addEventListener('click', handler2a, false);
 mbt.addEventListener('click', handler2b, false);
 let slider = document.getElementById("myRange" );
+if(slider){
 slider.addEventListener("change", handlerSlider,false);
+}
 let inited = false;
 
 function handler(e) {
