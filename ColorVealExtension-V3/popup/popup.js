@@ -1,5 +1,4 @@
 let ul = document.createElement('ul');
-
 let current = 'Original';
 let vision = {
   'Original': '',
@@ -9,11 +8,19 @@ let vision = {
   'Achromatomaly': '100%',
   'Custom': '100%'
 }
+let visionde = {
+  'Original': '',
+  'Protanomaly': 'red deficient',
+  'Deuteranomaly': 'red-green deficient',
+  'Tritanomaly': 'blue-yellow ',
+  'Achromatomaly': '',
+  'Custom': ''
+}
 
 Object.keys(vision).forEach(function (el) { //for each of the visions, add a button
   let li = document.createElement('li');
   li.dataset['type'] = el;
-  li.textContent = el;
+  li.textContent = el + " "+visionde[el];
   li.addEventListener('click', handler, false); //handler function for events
   el == current && li.classList.add('current');
   ul.appendChild(li); //add the new html to the ul
@@ -66,7 +73,7 @@ function handlerSlider(e){
   let sfilter = current + "Matrix";
   res += ", " + sfilter;
   chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-      chrome.tabs.sendMessage(tabs[0].id, { msg: "intensity", data: res }, (response) => {
+      chrome.tabs.sendMessage(tabs[0].id, { msg: "change", data: res }, (response) => {
       });
   });
 }
@@ -92,7 +99,7 @@ function filterHandler(e){
     butw.textContent = this.textContent;// document.body.appendChild(this.text);
     document.body.appendChild(butw);
 
-    chrome.tabs.sendMessage(tabs[0].id, { msg: "changeFilter", data: this.text }, (response) => {
+    chrome.tabs.sendMessage(tabs[0].id, { msg: "change", data: this.text }, (response) => {
     });
   });
 }
