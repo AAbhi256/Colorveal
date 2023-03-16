@@ -21,7 +21,8 @@ Object.keys(vision).forEach(function (el) { //for each of the visions, add a but
 let pbt = document.getElementById('pbt'), mbt = document.getElementById('mbt');
 pbt.addEventListener('click', handler2a, false);
 mbt.addEventListener('click', handler2b, false);
-
+let slider = document.getElementById("myRange" );
+slider.addEventListener("change", handlerSlider,false);
 let inited = false;
 
 function handler(e) {
@@ -57,6 +58,16 @@ function handler2b(e) {
     });
   });
 }
+function handlerSlider(e){
+  let res = "";
+  res += slider.value +" ";
+  let sfilter = current + "Matrix";
+  res += ", " + sfilter;
+  chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+      chrome.tabs.sendMessage(tabs[0].id, { msg: "intensity", data: res }, (response) => {
+      });
+  });
+}
 
 function $(selector, context) {
   return (context || document).querySelector(selector);
@@ -69,6 +80,17 @@ let numFilters = 2;
 for(let i =0; i < numFilters; i++){
    let but = document.createElement('button');
    but.addEventListener('click', filterHandler, false);
-   but.textContent("Filter " + (i+1));
+   but.textContent = i+1;
    document.body.appendChild(but);
+}
+
+function filterHandler(e){
+  chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+    butw = document.createElement('button'); 
+    butw.textContent = this.textContent;// document.body.appendChild(this.text);
+    document.body.appendChild(butw);
+
+    chrome.tabs.sendMessage(tabs[0].id, { msg: "changeFilter", data: this.text }, (response) => {
+    });
+  });
 }

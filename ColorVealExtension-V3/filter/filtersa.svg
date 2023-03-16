@@ -11,10 +11,10 @@
 		
 		<filter id="Protanomaly" >
 			<!-- <feColorMatrix type="saturate" values="1.1"/> -->
-			<feColorMatrix id = "ProtanomalyMatrix" values="	1.2 0.00358 0.00358 0 0
-																0 1 0 0 0
-																0 0 1 0 0
-																0 0 0 1 0"/>
+			<feColorMatrix id="ProtanomalyMatrix" values="0.46533 0.53467 0 0 0 
+												            0.06533 0.93467 0 0 0 
+												            0.00268 0.00268 1.00000 0 0 
+												            0 0 0 1 0"/> </filter> 
 			<!-- <feColorMatrix values="	1.2 0 0 0 -0.2
 									0 1.2 0 0 -0.2
 									0 0 1.2 0 -0.2
@@ -22,26 +22,29 @@
 
 		</filter>
 
-		<filter id="Deuteranomaly">
-			<feColorMatrix id = "DeuteranomalyMatrix" values="	1 0 0 0 0
-									0.00358 1.2 0.00358 0 0
-									0 0 1 0 0
-									0 0 0 1 0"/>
+		 <filter id="Deuteranomaly"> 
+		 	<feColorMatrix id="DeuteranomalyMatrix" values="0.57418 0.42582 0 0 0
+												 0.17418 0.82582 0 0 0 
+												-0.01318 0.01318 1 0 0
+												 0 0 0 1 0"  /> 
+			
 		</filter>
 
 		<filter id="Tritanomaly">
-			<feColorMatrix id = "TritanomalyMatrix" values="	1 0 0 0 0
-									0 1 0 0 0
-									0.00358 0.00358 1.2 0 0
-									0 0 0 1 0"/>
+			<feColorMatrix id="TritanomalyMatrix" values="1 0.09142 -0.09142 0 0 
+												0 0.92030 0.07970 0 0 
+												0 0.52030 0.47970 0 0 
+												0 0 0 1 0" /> 
+			
+	
                         
 		</filter>
 
 		<filter id="Achromatomaly">
-			<feColorMatrix id = "AchromatomalyMatrix" values="	1.2 0 0 0 0
-																0 1.2 0 0 0
-																0 0 1.2 0 0
-																0 0 0 1 0"/>
+			<feColorMatrix id="AchromatomalyMatrix" values="0.618 0.320 0.062 0 0
+												0.163 0.775 0.062 0 0 
+												0.163 0.320 0.516 0 0 
+												0 0 0 1 0"  />
                         
 		</filter>
 		

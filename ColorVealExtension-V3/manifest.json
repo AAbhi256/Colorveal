@@ -17,14 +17,15 @@
 	},
 
     "web_accessible_resources": [
-        "filter/filters.svg"
+        "filter/filtersa.svg"
     ],
 	
 	"content_scripts": [
 		{
 			"matches": ["<all_urls>"],
 			"css": [],
-			"js": ["filter/filters.js"]
+			"js": ["filter/filtersa.js"]
 		}
 	]
+	
 }

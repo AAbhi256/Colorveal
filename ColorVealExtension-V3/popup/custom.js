@@ -10,6 +10,7 @@ let pbtB = document.getElementById('pbtB'), mbtB = document.getElementById('mbtB
 pbtB.addEventListener('click', handler2aB, false);
 mbtB.addEventListener('click', handler2bB, false);
 
+
 let redvalues = [1, 0, 0, 0, 0];
 let greenvalues = [0, 1, 0, 0, 0];
 let bluevalues = [0, 0, 1, 0, 0];
