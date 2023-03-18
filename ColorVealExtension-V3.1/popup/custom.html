@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <link rel="manifest" href="/manifest.json">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ColorVeal</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="popup.css">
+</head>
+
+
+<body class="filtered">
+	<main class="center">
+        <span>
+            <h1 id = "p1"><strong>ColorVeal</strong></h1>
+            <hr>
+			<img src="wheel.png">
+        </span>
+        <a href="popup.html" target = "_self">
+            <button class="button">Back</button>
+        </a>
+        <p>Adjust each color until you can see all shades distinctly.</p>
+        <div class="colorbar">
+            <div class="pbt" id = 'mbtR'>
+                <div>-</div>
+            </div>
+            <img src="redshades.png">
+            <div class="pbt" id = 'pbtR'>
+                <div>+</div>
+            </div>
+        </div>
+
+        <div class="colorbar">
+            <div class="pbt" id = 'mbtG'>
+                <div>-</div>
+            </div>
+            <img src="greenshades.png">
+            <div class="pbt" id = 'pbtG'>
+                <div>+</div>
+            </div>
+        </div>
+
+        <div class="colorbar">
+            <div class="pbt" id = 'mbtB'>
+                <div>-</div>
+            </div>
+            <img src="blueshades.png">
+            <div class="pbt" id = 'pbtB'>
+                <div>+</div>
+            </div>
+        </div>
+
+        <button class="button" id="apply">
+            <div>Apply Changes</div>
+        </button>
+
+        <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="0" height="0">
+            <defs>
+                <filter id="Custom">
+                    <feColorMatrix id="customMatrix" values="	1 0 0 0 0
+                                            0 1 0 0 0
+                                            0 0 1 0 0
+                                            0 0 0 1 0"/>
+                </filter>
+            </defs>
+        </svg>
+
+    </main>
+    <script src="custom.js"></script>
+
+</body>
+
+</html>

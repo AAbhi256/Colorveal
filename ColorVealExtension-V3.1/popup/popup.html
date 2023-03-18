@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <link rel="manifest" href="/manifest.json">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title class="bolded">ColorVeal</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="popup.css">
+</head>
+
+
+<body>
+	<main class="center">
+        <span>
+            <h1 id = "p1"><strong>ColorVeal</strong></h1>
+            <hr>
+			<img src="wheel.png">
+        </span>
+        <div class="slidecontainer">
+            <input type="range" min="1" max="100" value="100" class="slider" id="myRange">
+            <div>Intensity</div>
+        </div>
+        <a href="color-blindness-quiz/index.html" target = "_self">
+            <button class="button">Take the Color Blindness Quiz Here</button>
+        </a>
+        <a href="custom.html" target = "_self">
+            <button class="button">Set Your Custom Filter</button>
+        </a>
+       
+
+        <div class = "adjust" id = "adj">
+            <div class="pbt" id = 'mbt'>
+                <!-- <div>Click to Decrease Filter Intensity</div> -->
+            </div>
+
+            <div class="pbt" id = 'pbt'>
+                <!-- <div>Click to Increase Filter Intensity</div> -->
+            </div>
+        </div>
+
+        
+
+    </main>
+	<script src="popup.js"></script>
+</body>
+
+</html>
