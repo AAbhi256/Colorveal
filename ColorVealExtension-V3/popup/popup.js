@@ -93,13 +93,3 @@ for(let i =0; i < numFilters; i++){
    document.body.appendChild(but);
 }
 
-function filterHandler(e){
-  chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-    butw = document.createElement('button'); 
-    butw.textContent = this.textContent;// document.body.appendChild(this.text);
-    document.body.appendChild(butw);
-
-    chrome.tabs.sendMessage(tabs[0].id, { msg: "change", data: this.text }, (response) => {
-    });
-  });
-}

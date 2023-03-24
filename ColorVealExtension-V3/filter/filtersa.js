@@ -5,9 +5,7 @@ xhr.addEventListener('load', function(e) {
   filter.style.display = 'none';
   document.body.appendChild(filter);
 })
-let initDs;
-let initPs;
-let initTs;
+
 function svgToMatrix(mat1){
   let outmatr = new Array(4);
   for(let i = 0; i < 4; i++){
@@ -47,8 +45,6 @@ let curr  = 1;
 let ps = [[0, 1.05118294, -0.05116099],[0, 1,0],[0,0,1]];
 let ds =  [[1, 0, 0],[0.9513092, 0, 0.04866992],[0, 0, 1]];
 let ts =  [[1, 0, 0],[0, 1, 0],[-0.86744736, 1.86727089]];
-// let t2 = [[0.0841456, 0.708538, 0.148692], [-0.0767272, 0.983854, 0.0817696],[-0.0192357,0.152575, 0.876454]];
-// let t1 = [[5.47221, -4.64196,0.169637],[-1.12524, 2.29317, -0.167895],[0.0298017, -0.193181,1.16365]];
 let t1 = [[0.4124564, 0.3575761,0.1804375],[0.2126729,0.7151522, 0.0721750], [0.0193339, 0.1191920, 0.9503041]]
 let t2 = [[0.4002, 0.7076,-0.0808],[-0.2263, 1.1653, -0.0808],[0, 0, 0.9182]];
 function changeFilter(type, perc){
@@ -60,21 +56,6 @@ function changeFilter(type, perc){
     arr[i] = new Array(3); 
   }
   
-  //console.log("converting input svg matrix to 3x3");
- // currMatrix = svgToMatrix(currMatrix);
-  
-  //converts to 3x3 matrix
-  // for(let i = 0; i < 3; i++){
-  //     for(let j =0; j < 3; j++){
-  //          console.log(currMatrix[i][j]);
-  //         arr[i][j] = currMatrix[i][j]; 
-  //         console.log(arr[i][j]);
-  //     }
-  // }
-  // console.log(currMatrix);
-  // console.log("printed curr");
-  // console.log(arr);
-  // console.log("printed arr");
   let fin;
   
   console.log("getting filter");
@@ -88,7 +69,7 @@ function changeFilter(type, perc){
 
   }else{
     fin= multiply(multiply(multiply(multiply(inverse(t1),inverse(t2)),[[1, 0, 0],[0, 1, 0],[0, 0, 1]]),t2),t1);
-  }console.log(fin);
+  }
   console.log("converting back to 5x4");
   //converts back to 5x4
   for(let i =0; i < 3; i++){
@@ -230,7 +211,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     let svg = document.getElementById(sfilter);
     let res = "";
    
-    let curValues = changeFilter(sfilter, parseInt(strength)/100);
+    let curValues = changeFilter(sfilter, (parseInt(strength)/100) * 2);
     for(let f = 0; f < 4*5; f++){
       res += curValues[f].toString() +  " ";
     }
