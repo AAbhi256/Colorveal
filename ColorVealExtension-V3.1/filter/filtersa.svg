@@ -8,6 +8,12 @@
 									0 0 1 0 0
 									0 0 0 1 0"/>
 		</filter>
+		<filter id="Originalcheck">
+			<feColorMatrix id = "OrginialMatrixcheck" values="	1 0 0 0 0
+									0 1 0 0 0
+									0 0 1 0 0
+									0 0 0 1 0"/>
+		</filter>
 		
 		<filter id="Protanomaly" >
 			<!-- <feColorMatrix type="saturate" values="1.1"/> -->
@@ -48,14 +54,58 @@
 												0.163 0.775 0.062 0 0 
 												0.163 0.320 0.516 0 0 
 												0 0 0 1 0"/>
+                 
+		</filter>
+		<!-- ...................WORKING FILTERS........................-->
+		
+		<filter id="Protanomalycheck" >
+			<!-- <feColorMatrix type="saturate" values="1.1"/> -->
+			<feColorMatrix id = "ProtanomalyMatrixcheck" color-interpolation-filters="linearRGB" values=
+															"0.170556992 0.829443014 0 0 0
+															0.170556991 0.829443008 0 0 0
+															-0.004517144 0.004517144 1 0 0
+															0 0 0 1 0"/>
+															
+			<!-- <feColorMatrix values="	1.2 0 0 0 -0.2
+									0 1.2 0 0 -0.2
+									0 0 1.2 0 -0.2
+									0 0 0 1 0"/> -->
+
+		</filter>
+
+		<filter id="Deuteranomalycheck">
+			<feColorMatrix id = "DeuteranomalyMatrixcheck" 
+			color-interpolation-filters="linearRGB" 
+			values="
+				0.33066007 0.66933993 0 0 0
+				0.33066007 0.66933993  0 0 0
+				-0.02785538 0.02785538 1 0 0
+				0 0 0 1 0"/>
+												 
+		</filter>
+
+		<filter id="Tritanomalycheck">
+			<feColorMatrix id = "TritanomalyMatrixcheck" color-interpolation-filters="linearRGB" values="1 0.1273989 -0.1273989 0 0
+			0 0.8739093 0.1260907 0 0
+			0 0.8739093 0.1260907 0 0
+			0 0 0 1 0"/>
+                        
+		</filter>
+
+		<filter id="Achromatomalycheck">
+			<feColorMatrix id = "AchromatomalyMatrixcheck" color-interpolation-filters="linearRGB"  values="	0.618 0.320 0.062 0 0
+												0.163 0.775 0.062 0 0 
+												0.163 0.320 0.516 0 0 
+												0 0 0 1 0"/>
                         
 		</filter>
 		
 		<filter id="Custom">
-			<feColorMatrix id = 'CustomMatrix' values="	1 0 0 0 0
+			<feColorMatrix id = 'CustomMatrix' color-interpolation-filters="linearRGB"  values="	1 0 0 0 0
 														0 1 0 0 0
 														0 0 1 0 0
 														0 0 0 1 0"/>
 		</filter>
-	</defs>
+	    <!-- WORKING FILTERS -->
+		</defs>
 </svg>

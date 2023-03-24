@@ -5,9 +5,23 @@ xhr.addEventListener('load', function(e) {
   filter.style.display = 'none';
   document.body.appendChild(filter);
 })
-let initDs;
-let initPs;
-let initTs;
+
+function addMatrix(mat1, mat2){
+  if(mat1.length != mat2.length || mat1[0].length != mat2[0].length) return false;
+  finmat = new Array(mat1.length);
+  for(let v =0; v < mat1.length; v++){
+    finmat[v] = new Array(mat1[0].length);
+  }
+  for(let i = 0; i < mat1.length; i++){
+    for(let j = 0; j < mat1[0].length; j++){
+        finmat[i][j] = mat1[i][j] + mat2[i][j];
+    }
+ }
+ //console.log(mat1, mat2);
+ //console.log("finalmat is");
+ //console.log(finmat);
+ return finmat;
+}
 function svgToMatrix(mat1){
   let outmatr = new Array(4);
   for(let i = 0; i < 4; i++){
@@ -48,9 +62,25 @@ let ps = [[0, 1.05118294, -0.05116099],
           [0, 1, 0],
           [0,0, 1]];
 let ds =  [[1, 0, 0],[0.9513092, 0, 0.04866992],[0, 0, 1]];
-let ts =  [[1, 0, 0],[0, 1, 0],[-0.86744736, 0, 1.86727089]];
-// let t2 = [[0.0841456, 0.708538, 0.148692], [-0.0767272, 0.983854, 0.0817696],[-0.0192357,0.152575, 0.876454]];
-// let t1 = [[5.47221, -4.64196,0.169637],[-1.12524, 2.29317, -0.167895],[0.0298017, -0.193181,1.16365]];
+let ts =  [[1, 0, 0],[0, 1, 0],[-0.86744736, 0, 1.86727089, 0]];
+//red
+let psf = [[2, -0.5, -0.5],
+          [-0.25, 1.25, 0],
+          [-0.25, 0, 1.25]];
+let tsf =  [//blue 
+  [1.25, 0, -0.25],
+  [0, 1.25, -0.25],
+  [-0.5, -0.5, 2]];
+
+let dsf =  [//green deficient
+  [1.25, -0.25, 0],
+  [-0.5, 2, -0.5],
+  [0, -0.25, 1.25]];
+let asf =[
+  [1.5, -0.25, -0.25],
+  [-0.25, 1.5, -0.25],
+  [-0.25, -0.25, 1.5]
+];
 let t1 = [[0.4124564, 0.3575761,0.1804375],[0.2126729,0.7151522, 0.0721750], [0.0193339, 0.1191920, 0.9503041]]
 let t2 = [[0.4002, 0.7076,-0.0808],[-0.2263, 1.1653, -0.0808],[0, 0, 0.9182]];
 
@@ -66,32 +96,33 @@ function matrixTransform(A, perc) {
 }
 
 function changeFilter(type, perc){
-  //should be 5x4 matrix, make into 3x3 
-  console.log(type);
-  console.log("instantiated 3x3 matrix");
+  if(type.includes("Original")){
+      return [[1, 0, 0],[0, 1, 0], [0, 0, 1]]
+  }
   let arr = new Array(3);
   for(let i =0; i < 3; i++){
     arr[i] = new Array(3); 
   }
-  
-  //console.log("converting input svg matrix to 3x3");
- // currMatrix = svgToMatrix(currMatrix);
-  
-  //converts to 3x3 matrix
-  // for(let i = 0; i < 3; i++){
-  //     for(let j =0; j < 3; j++){
-  //          console.log(currMatrix[i][j]);
-  //         arr[i][j] = currMatrix[i][j]; 
-  //         console.log(arr[i][j]);
-  //     }
-  // }
-  // console.log(currMatrix);
-  // console.log("printed curr");
-  // console.log(arr);
-  // console.log("printed arr");
   let fin;
-  
-  console.log("getting filter");
+  if(type.includes("check")){
+     
+    console.log("getting filter");
+  let d = inverse(multiply( t2, t1));;
+  if(type.includes( "ProtanomalyMatrix")){
+    
+    return lerp([[1, 0, 0],[0, 1, 0],[0, 0, 1]], psf, perc)
+    //fin = pcontrast
+  }else if(type.includes("DeuteranomalyMatrix")){
+    return lerp( [[1, 0, 0],[0, 1, 0], [0, 0, 1]], multiply(d ,  dsf), perc*0.5) ;
+  }else if(type.includes("TritanomalyMatrix")){   
+    return lerp( [[1, 0, 0],[0, 1, 0], [0, 0, 1]], multiply(d ,  tsf), perc*0.5) ;
+  }else if (type.includes("AchromatomalyMatrix")){
+    return lerp( [[1, 0, 0],[0, 1, 0], [0, 0, 1]], multiply(d ,  asf), perc*0.5) ;
+  }else{
+    return [[1, 0, 0],[0, 1, 0],[0, 0, 1]];
+  }
+  }else{
+  //console.log("getting filter");
   if(type == "ProtanomalyMatrix"){
     fin = matrixTransform(ps, perc);
     //fin = pcontrast
@@ -102,15 +133,15 @@ function changeFilter(type, perc){
   }else if (type == "AchromatomalyMatrix"){
     fin= matrixTransform(as, perc);
   }else{
-    fin= multiply(multiply(multiply(multiply(inverse(t1),inverse(t2)),[[1, 0, 0],[0, 1, 0],[0, 0, 1]]),t2),t1);
+    fin= [[1, 0, 0],[0, 1, 0],[0, 0, 1]];
   }
-  console.log(fin);
-  console.log("converting back to 5x4");
+}
+  //console.log(fin);
+  //console.log("converting back to 5x4");
   //converts back to 5x4
   for(let i =0; i < 3; i++){
     for(let j=0; j <3; j++){
-      
-      if(type == "ProtanomalyMatrix" || type == "DeuteranomalyMatrix"){
+      if(type.includes("ProtanomalyMatrix") || type.includes("DeuteranomalyMatrix")){
         if((i == 0 || i == 1)&& j ==2){
            arr[i][j] = 0;
         } else if(i == 2 && j ==2){
@@ -118,7 +149,7 @@ function changeFilter(type, perc){
         }else{
           arr[i][j] = fin[i][j];
         }
-      }else if(type == "TritanomalyMatrix"){
+      }else if(type.includes("TritanomalyMatrix")){
          if((i== 2 ||i ==1) && j ==0){
            arr[i][j]= 0;
          } else if(i== 0 && j ==0){
@@ -131,10 +162,9 @@ function changeFilter(type, perc){
       
     }
   }
-  console.log(arr);
-  let ff =matrixToSvg(arr);  
-  //console.log("converting to svg format");
-  //console.log(ff);
+  
+  let ff =arr;  
+  
   return ff;
 }
 function det(mat1) {
@@ -203,8 +233,8 @@ function inverse(mat1){
   
   function lerp(start, end, t) {
     const result = [];
-    console.log(t);
-    console.log(start, end);
+    //console.log(t);
+    //console.log(start, end);
     for (let row = 0; row < start.length; row++) {
         const newRow = [];
         for (let col = 0; col < start[0].length; col++) {
@@ -239,28 +269,39 @@ function multiply(mat1, mat2) {
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   //console.log("some message receieved");
   if(request.msg == "change"){
-    let sfilter = request.data.split(", ")[1];
+     let sfilter = request.data.split(", ")[1];
+     
+    if(!sfilter.includes("Original")){
+        
+    let svg = document.getElementById(sfilter);
     let strength = request.data.split(", ")[0];
     console.log("sfilter: " + sfilter);
     console.log("strength: "+ strength);
-    let svg = document.getElementById(sfilter);
-    let res = "";
-   
-    let curValues = changeFilter(sfilter, parseInt(strength)/100);
-    for(let f = 0; f < 4*5; f++){
-      res += curValues[f].toString() +  " ";
-    }
     
-    console.log("string filter final");
+    let res = "";
+    
+    let curValues = matrixToSvg(changeFilter(sfilter, (parseInt(strength)/100)));
+    console.log("Current Values:");
+    console.log(curValues);
+    for(let f = 0; f < 4*5; f++){
+      res += curValues[f] +  " ";
+    }
+    console.log(res);
+    
+   
     
     svg.setAttribute('values', res);
     svg.setAttribute("color-interpolation-filters","linearRGB");
     sendResponse({ sender: "popup.js", data: "bald"  }); 
     return true;
   }
+  }
   if (request.msg == "add") {
-        let sfilter = request.data;
-       let svg = document.getElementById(sfilter);
+       // let sfilter = request.data;
+       //let svg = document.getElementById(sfilter);
+       console.log(request.data);
+       console.log("a thing");
+      // console.log("doing something");
       // let curValues ; 
       // //currMatrix = curValues;
       // let res = "";
@@ -291,10 +332,10 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
       //   }
       //   res += " ";
       
-      // svg.setAttribute('values', res);
+       //svg.setAttribute('values', res);
       // //console.log(svg.values);
       // //console.log(res);
-      console.log(svg.values.baseVal);
+     // console.log(svg.values.baseVal);
       }
       sendResponse({ sender: "popup.js", data: "bald"  }); 
   
@@ -331,15 +372,34 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
       sendResponse({ sender: "popup.js", data: "bald"  }); // This response is sent to the message's sender 
   }
   else if (request.msg == "custom") {
-    let values = request.data;
+    //let values = request.data;
+    //let svg = document.getElementById("CustomMatrix");
+    // console.log("okkkk");
+    // let res = "";
+    // let vr = values.split(" ");
+    // if(vr.includes("check")){
+    //   let ident = [[1, 0, 0],[0, 1, 0],[0, 0, 1]]
+    //   values = matrixToSvg(matrixTransform(
+    //   addMatrix(addMatrix(lerp(ident, ps, parseInt(vr[0])),
+    //   lerp(ident, ds, parseInt(vr[1]))),
+    //   lerp(ident, ts, parseInt(vr[2]))), 1));
+      
+    //   for(let f = 0; f < 4*5; f++){
+    //     res += values[f] +  " ";
+    //   }
+    //   svg.setAttribute('values', res);
+    // }
+    // else{
+      let values = request.data;
     let svg = document.getElementById("CustomMatrix");
-    //console.log(values);
-
+    
     chrome.storage.sync.set({'key': values}, function() {
     });
     
 
     svg.setAttribute('values', values);
+    
+    
   }
   else if (request.msg == "init") {
     chrome.storage.sync.get(['key'], function(result) {
